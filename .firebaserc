@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng-journal-cddb9": {
+      "hosting": {
+        "app": [
+          "ng-journal-cddb9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng-journal-cddb9"
+  }
+}
