@@ -1,7 +1,8 @@
 <div *ngFor="let journal of journals">
   <journal-list-item
     [journal]="journal"
-    (onJournalClicked)="handleJournalClicked($event)">
+    (onJournalClicked)="handleJournalClicked($event)"
+    (onDeleteClicked)="handleDeleteClicked($event)">
   </journal-list-item>
 </div>
 <ion-button (click)="handleNewJournalClicked()">

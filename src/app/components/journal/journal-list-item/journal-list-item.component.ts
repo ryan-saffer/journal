@@ -12,13 +12,18 @@ export class JournalListItemComponent implements OnInit {
 
   @Input() journal: Journal
   @Output() onJournalClicked = new EventEmitter<Journal>()
+  @Output() onDeleteClicked = new EventEmitter<Journal>()
 
   constructor() { }
 
   ngOnInit() {}
 
-  onClick(journal: Journal) {
-    this.onJournalClicked.emit(journal)
+  handleClick() {
+    this.onJournalClicked.emit(this.journal)
+  }
+
+  handleDeleteClick() {
+    this.onDeleteClicked.emit(this.journal)
   }
 
   unixToString(millis: number) {

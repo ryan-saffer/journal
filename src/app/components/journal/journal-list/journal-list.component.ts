@@ -11,6 +11,7 @@ export class JournalListComponent implements OnInit {
   @Input() journals: Journal[]
   @Output() onJournalClick = new EventEmitter<Journal>()
   @Output() onNewJournalClick = new EventEmitter()
+  @Output() onDeleteJournalClick = new EventEmitter<Journal>()
 
   constructor() { }
 
@@ -22,6 +23,10 @@ export class JournalListComponent implements OnInit {
 
   handleNewJournalClicked() {
     this.onNewJournalClick.emit()
+  }
+
+  handleDeleteClicked(journal: Journal) {
+    this.onDeleteJournalClick.emit(journal)
   }
 
 }

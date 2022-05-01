@@ -3,5 +3,6 @@ export interface Journal {
     title: string,
     content: string,
     htmlContent: string,
-    lastEdit: number
+    lastEdit: number,
+    saved?: boolean
 }

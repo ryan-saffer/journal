@@ -9,15 +9,20 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
-      <ion-col size="3">
+      <ion-col size="4">
         <journal-list
           [journals]="journals ?? []"
           (onJournalClick)="handleJournalClick($event)"
-          (onNewJournalClick)="handleNewJournalClick()">
-        </journal-list>
+          (onNewJournalClick)="handleNewJournalClick()"
+          (onDeleteJournalClick)="handleDeleteJournalClick($event)"
+        ></journal-list>
       </ion-col>
-      <ion-col size="9">
-        <journal-editor *ngIf="selectedJournal" [journal]="selectedJournal" (onSave)="handleSave($event)"></journal-editor>
+      <ion-col size="8">
+        <journal-editor
+          *ngIf="selectedJournal"
+          [journal]="selectedJournal"
+          (onSave)="handleSave($event)"
+        ></journal-editor>
         <div class="empty" *ngIf="!selectedJournal">
           <h3>It looks like you don't have journal entries!</h3>
           <h4>Why not try creating one 😅</h4>
