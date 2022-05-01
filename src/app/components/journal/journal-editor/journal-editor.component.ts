@@ -24,6 +24,7 @@ export class JournalEditorComponent implements OnInit {
   handleContentChanged(content: ContentChange) {
     this.journal.htmlContent = content.html
     this.journal.content = content.text
+    this.journal.lastEdit = Date.now()
     this.journal.saved = false
   }
 
