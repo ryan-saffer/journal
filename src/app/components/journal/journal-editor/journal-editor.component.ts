@@ -16,10 +16,11 @@ export class JournalEditorComponent implements OnInit {
   ngOnInit() {}
 
   handleEditorCreated() {
-    document.getElementsByClassName('ql-editor ql-blank')[0].innerHTML = `<p>Looks like this is my only way to do this..</p>`
+    document.getElementsByClassName('ql-editor ql-blank')[0].innerHTML = this.journal.htmlContent
   }
 
   handleContentChanged(content: ContentChange) {
-    this.journal.content = content.html
+    this.journal.htmlContent = content.html
+    this.journal.content = content.text
   }
 }

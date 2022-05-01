@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 
 import { JournalRootComponent } from './journal-root/journal-root.component';
 import { JournalEditorComponent } from './journal-editor/journal-editor.component';
+import { JournalListComponent } from './journal-list/journal-list.component';
+import { JournalListItemComponent } from './journal-list-item/journal-list-item.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,11 @@ import { JournalEditorComponent } from './journal-editor/journal-editor.componen
       }
     ])
   ],
-  declarations: [JournalRootComponent, JournalEditorComponent]
+  declarations: [
+    JournalRootComponent,
+    JournalEditorComponent,
+    JournalListComponent,
+    JournalListItemComponent
+  ]
 })
 export class JournalModule {}

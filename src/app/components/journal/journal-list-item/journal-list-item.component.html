@@ -1,0 +1,11 @@
+
+<ion-card (click)="onClick(journal)">
+  <ion-card-header>
+    <ion-card-subtitle>{{ journal.lastEdit }}</ion-card-subtitle>
+    <ion-card-title>{{ journal.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{ journal.content.length > 250 ? journal.content.substring(0, 250) + "..." : journal.content }}
+  </ion-card-content>
+</ion-card>
