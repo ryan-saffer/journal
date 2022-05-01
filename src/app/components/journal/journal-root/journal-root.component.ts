@@ -1,3 +1,4 @@
+import { replaceQuillContent } from 'src/app/utilities';
 import { JournalService } from './../../../services/journal.service';
 import { Component, OnInit } from '@angular/core';
 import { Journal } from '../../types/Journal';
@@ -24,6 +25,7 @@ export class JournalRootComponent implements OnInit {
 
   handleJournalClick(journal: Journal) {
     this.selectedJournal = journal
+    replaceQuillContent(journal.htmlContent)
   }
 
   handleNewJournalClick() {
@@ -37,6 +39,7 @@ export class JournalRootComponent implements OnInit {
       }
     ]
     this.selectedJournal = this.journals[this.journals.length -1]
+    replaceQuillContent('')
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
-import { replaceQuillContent } from 'src/app/utilities';
+import { replaceEmptyQuillContent, replaceQuillContent } from 'src/app/utilities';
 import { Journal } from '../../types/Journal';
 
 @Component({
@@ -17,7 +17,7 @@ export class JournalEditorComponent implements OnInit {
   ngOnInit() {}
 
   handleEditorCreated() {
-    replaceQuillContent(this.journal.htmlContent)
+    replaceEmptyQuillContent(this.journal.htmlContent)
   }
 
   handleContentChanged(content: ContentChange) {
