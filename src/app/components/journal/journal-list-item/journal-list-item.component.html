@@ -1,7 +1,7 @@
 
 <ion-card (click)="onClick(journal)">
   <ion-card-header>
-    <ion-card-subtitle>{{ journal.lastEdit }}</ion-card-subtitle>
+    <ion-card-subtitle>{{ unixToString(journal.lastEdit) }}</ion-card-subtitle>
     <ion-card-title>{{ journal.title }}</ion-card-title>
   </ion-card-header>
 

@@ -18,8 +18,13 @@ export class JournalRootComponent implements OnInit {
   ngOnInit() {
     this.journalService.getJournals()
       .subscribe(journals => {
-        this.journals = journals
-        this.selectedJournal = journals[0]
+        this.journals = journals.map(action => {
+          return {
+            id: action.payload.doc.id,
+            ...action.payload.doc.data()
+          }
+        })
+        this.selectedJournal = this.journals[0]
       })
   }
 
@@ -35,11 +40,19 @@ export class JournalRootComponent implements OnInit {
         title: 'New journal entry',
         content: '',
         htmlContent: '',
-        lastEdit: Date.now().toLocaleString()
+        lastEdit: Date.now()
       }
     ]
     this.selectedJournal = this.journals[this.journals.length -1]
     replaceQuillContent('')
   }
 
+  handleSave(journal: Journal) {
+    const { id, ...rest } = journal
+    if (id) { // only existing documents will have an id, and can be updated
+      this.journalService.updateJournal(journal)
+    } else { // new documents need an id created
+      this.journalService.addJournal(rest)
+    }
+  }
 }

@@ -1,5 +1,7 @@
+import { DateTime } from 'luxon';
 import { Journal } from '../../types/Journal';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'journal-list-item',
@@ -17,5 +19,10 @@ export class JournalListItemComponent implements OnInit {
 
   onClick(journal: Journal) {
     this.onJournalClicked.emit(journal)
+  }
+
+  unixToString(millis: number) {
+    let datetime = DateTime.fromMillis(millis)
+    return datetime.toLocaleString(DateTime.DATETIME_MED)
   }
 }

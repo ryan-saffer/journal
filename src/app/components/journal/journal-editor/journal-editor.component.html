@@ -3,7 +3,7 @@
     (onEditorCreated)="handleEditorCreated()"
     (onContentChanged)="handleContentChanged($event)"
 ></quill-editor>
-<ion-button>
+<ion-button (click)="save()">
     <ion-icon slot="end" name="save-outline"></ion-icon>
     Save journal entry
 </ion-button>

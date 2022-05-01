@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
-import { replaceEmptyQuillContent, replaceQuillContent } from 'src/app/utilities';
+import { replaceQuillContent } from 'src/app/utilities';
 import { Journal } from '../../types/Journal';
 
 @Component({
@@ -11,17 +11,22 @@ import { Journal } from '../../types/Journal';
 export class JournalEditorComponent implements OnInit {
 
   @Input() journal: Journal
+  @Output() onSave = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {}
 
   handleEditorCreated() {
-    replaceEmptyQuillContent(this.journal.htmlContent)
+    replaceQuillContent(this.journal.htmlContent)
   }
 
   handleContentChanged(content: ContentChange) {
     this.journal.htmlContent = content.html
     this.journal.content = content.text
+  }
+
+  save() {
+    this.onSave.emit(this.journal)
   }
 }
