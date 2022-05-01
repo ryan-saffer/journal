@@ -1,4 +1,4 @@
-<ion-input placeholder="Journal Title" [value]="journal.title"></ion-input>
+<ion-input placeholder="Journal Title" [(ngModel)]="journal.title" ></ion-input>
 <quill-editor
     (onEditorCreated)="handleEditorCreated()"
     (onContentChanged)="handleContentChanged($event)"
