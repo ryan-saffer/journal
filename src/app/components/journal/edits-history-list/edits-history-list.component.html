@@ -6,6 +6,8 @@
   </ion-item>
 </ion-list>
 
+<h3 *ngIf="journals.length === 0">No edits yet!</h3>
+
 <ion-modal [isOpen]="isModalOpen" (didDismiss)="resetModal()">
   <ng-template>
     <quill-view [content]="selectedJournal.content" format="text" theme="snow"></quill-view>
