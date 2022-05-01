@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { JournalComponent } from './journal.component';
+import { JournalRootComponent } from './journal-root.component';
 
 describe('JournalComponent', () => {
-  let component: JournalComponent;
-  let fixture: ComponentFixture<JournalComponent>;
+  let component: JournalRootComponent;
+  let fixture: ComponentFixture<JournalRootComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ JournalComponent ],
+      declarations: [ JournalRootComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(JournalComponent);
+    fixture = TestBed.createComponent(JournalRootComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

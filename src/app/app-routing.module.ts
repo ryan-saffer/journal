@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { JournalComponent } from './journal/journal.component';
+import { JournalRootComponent } from './components/journal/journal-root/journal-root.component';
 
 const routes: Routes = [
-  { path: '', component: JournalComponent },
+  { path: '', component: JournalRootComponent },
 ];
 
 @NgModule({

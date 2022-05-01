@@ -5,25 +5,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { JournalComponent } from './journal.component';
+import { JournalRootComponent } from './journal-root/journal-root.component';
+import { JournalEditorComponent } from './journal-editor/journal-editor.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    QuillModule.forRoot({
-      modules: {
-        syntax: true
-      }
-    }),
+    QuillModule.forRoot(),
     RouterModule.forChild([
       {
         path: '',
-        component: JournalComponent
+        component: JournalRootComponent
       }
     ])
   ],
-  declarations: [JournalComponent]
+  declarations: [JournalRootComponent]
 })
 export class JournalModule {}
