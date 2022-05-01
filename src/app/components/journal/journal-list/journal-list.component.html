@@ -1,3 +1,10 @@
 <div *ngFor="let journal of journals">
-  <journal-list-item [journal]="journal"></journal-list-item>
+  <journal-list-item
+    [journal]="journal"
+    (onJournalClicked)="handleJournalClicked($event)">
+  </journal-list-item>
 </div>
+<ion-button (click)="handleNewJournalClicked()">
+  <ion-icon slot="start" name="add-outline"></ion-icon>
+  Create new entry
+</ion-button>

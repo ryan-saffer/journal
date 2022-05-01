@@ -1,6 +1,9 @@
-<ion-input placeholder="Journal Title" [(ngModel)]="journal.title" ></ion-input>
+<ion-input placeholder="Journal Title" [(ngModel)]="journal.title"></ion-input>
 <quill-editor
     (onEditorCreated)="handleEditorCreated()"
     (onContentChanged)="handleContentChanged($event)"
 ></quill-editor>
-<ion-button>Save journal entry</ion-button>
+<ion-button>
+    <ion-icon slot="end" name="save-outline"></ion-icon>
+    Save journal entry
+</ion-button>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Journal } from '../../types/Journal';
 
 @Component({
@@ -9,9 +9,19 @@ import { Journal } from '../../types/Journal';
 export class JournalListComponent implements OnInit {
 
   @Input() journals: Journal[]
+  @Output() onJournalClick = new EventEmitter<Journal>()
+  @Output() onNewJournalClick = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {}
+
+  handleJournalClicked(journal: Journal) {
+    this.onJournalClick.emit(journal)
+  }
+
+  handleNewJournalClicked() {
+    this.onNewJournalClick.emit()
+  }
 
 }

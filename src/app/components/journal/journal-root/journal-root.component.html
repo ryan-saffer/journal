@@ -10,10 +10,18 @@
   <ion-grid>
     <ion-row>
       <ion-col size="3">
-        <journal-list [journals]="journals"></journal-list>
+        <journal-list
+          [journals]="journals ?? []"
+          (onJournalClick)="handleJournalClick($event)"
+          (onNewJournalClick)="handleNewJournalClick()">
+        </journal-list>
       </ion-col>
       <ion-col size="9">
-        <journal-editor [journal]="journals[0]"></journal-editor>
+        <journal-editor *ngIf="selectedJournal" [journal]="selectedJournal"></journal-editor>
+        <div class="empty" *ngIf="!selectedJournal">
+          <h3>It looks like you don't have journal entries!</h3>
+          <h4>Why not try creating one 😅</h4>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

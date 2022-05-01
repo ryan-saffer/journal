@@ -1,6 +1,6 @@
+import { JournalService } from './../../../services/journal.service';
 import { Component, OnInit } from '@angular/core';
 import { Journal } from '../../types/Journal';
-import { JOURNALS } from '../journals';
 
 @Component({
   selector: 'app-journal',
@@ -9,12 +9,34 @@ import { JOURNALS } from '../journals';
 })
 export class JournalRootComponent implements OnInit {
 
-  journals: Journal[]
+  journals: Journal[] = []
+  selectedJournal: Journal
 
-  constructor() { }
+  constructor(private journalService: JournalService) { }
 
   ngOnInit() {
-    this.journals = JOURNALS
+    this.journalService.getJournals()
+      .subscribe(journals => {
+        this.journals = journals
+        this.selectedJournal = journals[0]
+      })
+  }
+
+  handleJournalClick(journal: Journal) {
+    this.selectedJournal = journal
+  }
+
+  handleNewJournalClick() {
+    this.journals = [
+      ...this.journals,
+      {
+        title: 'New journal entry',
+        content: '',
+        htmlContent: '',
+        lastEdit: Date.now().toLocaleString()
+      }
+    ]
+    this.selectedJournal = this.journals[this.journals.length -1]
   }
 
 }
