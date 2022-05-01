@@ -21,6 +21,6 @@ import { JournalEditorComponent } from './journal-editor/journal-editor.componen
       }
     ])
   ],
-  declarations: [JournalRootComponent]
+  declarations: [JournalRootComponent, JournalEditorComponent]
 })
 export class JournalModule {}

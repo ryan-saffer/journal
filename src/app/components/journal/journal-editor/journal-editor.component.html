@@ -1,0 +1,6 @@
+<ion-input placeholder="Journal Title" [value]="journal.title"></ion-input>
+<quill-editor
+    (onEditorCreated)="handleEditorCreated()"
+    (onContentChanged)="handleContentChanged($event)"
+></quill-editor>
+<ion-button>Save journal entry</ion-button>
