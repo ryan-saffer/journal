@@ -11,4 +11,12 @@
   <ion-card-content>
     {{ journal.content.length > 250 ? journal.content.substring(0, 250) + "..." : journal.content }}
   </ion-card-content>
+
+  <ion-button size="small" class="edits-btn" (click)="showVersionsModal()">Edits</ion-button>
 </ion-card>
+
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="resetModal()">
+  <ng-template>
+    <edits-history-list [journals]="journal.versions"></edits-history-list>
+  </ng-template>
+</ion-modal>

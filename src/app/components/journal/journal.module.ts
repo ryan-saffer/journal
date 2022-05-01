@@ -1,3 +1,4 @@
+import { EditsHistoryListComponent } from './edits-history-list/edits-history-list.component';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { IonicModule } from '@ionic/angular';
@@ -27,7 +28,8 @@ import { JournalListItemComponent } from './journal-list-item/journal-list-item.
     JournalRootComponent,
     JournalEditorComponent,
     JournalListComponent,
-    JournalListItemComponent
+    JournalListItemComponent,
+    EditsHistoryListComponent
   ]
 })
 export class JournalModule {}

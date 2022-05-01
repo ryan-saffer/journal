@@ -1,0 +1,13 @@
+<ion-list *ngFor="let journal of journals">
+  <ion-item detail (click)="setModalOpen(journal)">
+    <ion-label>
+      Last edited: {{ unixToString(journal.lastEdit) }}
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="resetModal()">
+  <ng-template>
+    <quill-view [content]="selectedJournal.content" format="text" theme="snow"></quill-view>
+  </ng-template>
+</ion-modal>

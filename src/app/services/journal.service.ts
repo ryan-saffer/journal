@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Journal, JournalDb } from '../components/types/Journal';
+import { Journal } from '../components/types/Journal';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -20,12 +20,12 @@ export class JournalService {
       ...journal,
       versions: []
     }
-    return from(this.firestore.collection<JournalDb>('journals').add(journalToWrite))
+    return from(this.firestore.collection<Journal>('journals').add(journalToWrite))
   }
 
   updateJournal(journal: Journal) {
     // first add current version to history
-    this.firestore.doc<JournalDb>(`journals/${journal.id}`).get()
+    this.firestore.doc<Journal>(`journals/${journal.id}`).get()
       .subscribe(snapshot => {
         let data = snapshot.data()
         const { versions, ...existingJournal } = data

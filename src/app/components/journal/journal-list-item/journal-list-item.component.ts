@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { Journal } from '../../types/Journal';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { unixToString } from 'src/app/utilities';
 
 
 @Component({
@@ -13,6 +14,8 @@ export class JournalListItemComponent implements OnInit {
   @Input() journal: Journal
   @Output() onJournalClicked = new EventEmitter<Journal>()
   @Output() onDeleteClicked = new EventEmitter<Journal>()
+
+  isModalOpen = false
 
   constructor() { }
 
@@ -27,7 +30,14 @@ export class JournalListItemComponent implements OnInit {
   }
 
   unixToString(millis: number) {
-    let datetime = DateTime.fromMillis(millis)
-    return datetime.toLocaleString(DateTime.DATETIME_MED)
+    return unixToString(millis)
+  }
+
+  showVersionsModal() {
+    this.isModalOpen = true
+  }
+
+  resetModal() {
+    this.isModalOpen = false
   }
 }

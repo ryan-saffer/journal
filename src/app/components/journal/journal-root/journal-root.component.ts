@@ -41,7 +41,8 @@ export class JournalRootComponent implements OnInit {
         content: '',
         htmlContent: '',
         lastEdit: Date.now(),
-        saved: false
+        saved: false,
+        versions: []
       }
     ]
     this.selectedJournal = this.journals[this.journals.length - 1]

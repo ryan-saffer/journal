@@ -1,15 +1,16 @@
-interface BaseJournal {
+export interface BaseJournal {
     title: string,
     content: string,
     htmlContent: string,
-    lastEdit: number
+    lastEdit: number,
 }
 
 export interface Journal extends BaseJournal {
-    id?: string,
-    saved?: boolean
-}
-
-export interface JournalDb extends BaseJournal {
-    versions: Journal[]
+    id?: string
+    title: string,
+    content: string,
+    htmlContent: string,
+    lastEdit: number,
+    saved?: boolean,
+    versions: BaseJournal[]
 }
