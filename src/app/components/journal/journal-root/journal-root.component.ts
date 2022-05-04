@@ -59,9 +59,14 @@ export class JournalRootComponent implements OnInit {
   handleSave(journal: Journal) {
     if (journal.storedInDb) { // only documents with firebase ids can be updated
       this.journalService.updateJournal(journal)
-        .then(() => this.selectedJournal = {
-          ...this.selectedJournal,
-          saved: true
+        .then((updatedJournal) => {
+          // replace the old version with the new version (includes all the edits)
+          this.journals.forEach((item, index) => {
+            if (item.id === journal.id) {
+              this.journals[index] = updatedJournal
+            }
+          })
+          this.selectedJournal = updatedJournal
         })
     } else { // new documents need an id created
       this.journalService.addJournal(journal)

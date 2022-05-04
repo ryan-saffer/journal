@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { Journal } from '../../types/Journal';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { unixToString } from 'src/app/utilities';

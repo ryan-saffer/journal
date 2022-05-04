@@ -30,21 +30,26 @@ export class JournalService {
     // ideally this could be done with typing, but need to find a cleaner way
     const { id, saved, storedInDb, ...sanitizedJournal } = journal
     // start by getting the current version in db, to store in versions
-    return new Promise(resolve => {
+    return new Promise<Journal>(resolve => {
       this.firestore.doc<Journal>(`journals/${id}`).get()
         .subscribe(snapshot => {
           let data = snapshot.data()
           const { versions, ...existingJournal } = data
           // then replace current version with latest, while adding in the existing one to versions
-          let newJournal: Journal = {
+          let updatedJournal: Journal = {
             ...sanitizedJournal,
             versions: [
               ...versions,
               existingJournal
             ]
           }
-          this.firestore.doc<Journal>(`journals/${journal.id}`).update(newJournal)
-          resolve(newJournal)
+          this.firestore.doc<Journal>(`journals/${journal.id}`).update(updatedJournal)
+          resolve({
+            ...updatedJournal,
+            id,
+            storedInDb,
+            saved: true
+          })
         })
     })
   }
