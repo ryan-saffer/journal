@@ -1,7 +1,9 @@
-import { replaceQuillContent } from 'src/app/utilities';
+import { replaceQuillContent, unixToString } from 'src/app/utilities';
 import { JournalService } from './../../../services/journal.service';
 import { Component, OnInit } from '@angular/core';
 import { Journal } from '../../types/Journal';
+
+var id = 0;
 
 @Component({
   selector: 'app-journal',
@@ -18,12 +20,13 @@ export class JournalRootComponent implements OnInit {
   ngOnInit() {
     this.journalService.getJournals()
       .subscribe(journals => {
-        this.journals = journals.map(action => {
-          return {
-            id: action.payload.doc.id,
-            ...action.payload.doc.data(),
-          }
-        })
+        this.journals = journals.docs.map(journal => ({
+              id: journal.id,
+              storedInDb: true,
+              ...journal.data()
+            }
+        ))
+        this.journals.sort((first, second) => second.lastEdit - first.lastEdit)
         this.selectedJournal = this.journals[0]
       })
   }
@@ -37,12 +40,14 @@ export class JournalRootComponent implements OnInit {
     this.journals = [
       ...this.journals,
       {
+        id: (id++).toString(),
         title: 'New journal entry',
         content: '',
         htmlContent: '',
         lastEdit: Date.now(),
         saved: false,
-        versions: []
+        versions: [],
+        storedInDb: false
       }
     ]
     this.selectedJournal = this.journals[this.journals.length - 1]
@@ -52,20 +57,34 @@ export class JournalRootComponent implements OnInit {
   }
 
   handleSave(journal: Journal) {
-    const { saved, ...rest } = journal
-    if (journal.id) { // only existing documents will have an id, and can be updated
-      this.journalService.updateJournal(rest)
+    if (journal.storedInDb) { // only documents with firebase ids can be updated
+      this.journalService.updateJournal(journal)
+        .then(() => this.selectedJournal = {
+          ...this.selectedJournal,
+          saved: true
+        })
     } else { // new documents need an id created
-      this.journalService.addJournal(rest)
+      this.journalService.addJournal(journal)
+        .subscribe(newJournal => {
+          // now that the journal has been saved, replace its id with the firestore id
+          let updatedJournal: Journal = {
+            ...journal,
+            id: newJournal.id,
+            storedInDb: true,
+            saved: true
+          }
+          this.journals = [
+            ...this.journals.filter(it => it.id !== journal.id),
+            updatedJournal
+          ]
+          // and ensure we set it as selected... or any new saves won't be using the correct id
+          this.selectedJournal = updatedJournal
+        })
     }
   }
 
   handleDeleteJournalClick(journal: Journal) {
-    if (journal.id) {
-      this.journalService.deleteJournal(journal)
-        .subscribe(() => this.journals = this.journals.filter(it => it.id !== journal.id))
-    } else {
-      window.alert('Journal has not yet been saved!')
-    }
+    this.journalService.deleteJournal(journal)
+      .subscribe(() => this.journals = this.journals.filter(it => it.id !== journal.id))
   }
 }

@@ -1,5 +1,5 @@
 
-<ion-card (click)="handleClick()">
+<ion-card color="{{ this.journal.id === this.selectedJournal.id ? 'medium' : '' }}" (click)="handleClick()">
   <ion-card-header>
     <ion-button class="ion-float-right" color="danger" (click)="handleDeleteClick()"><ion-icon name="trash-outline"></ion-icon></ion-button>
     <ion-card-subtitle>{{ unixToString(journal.lastEdit) }}</ion-card-subtitle>

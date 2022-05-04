@@ -12,6 +12,7 @@ import { unixToString } from 'src/app/utilities';
 export class JournalListItemComponent implements OnInit {
 
   @Input() journal: Journal
+  @Input() selectedJournal: Journal
   @Output() onJournalClicked = new EventEmitter<Journal>()
   @Output() onDeleteClicked = new EventEmitter<Journal>()
 

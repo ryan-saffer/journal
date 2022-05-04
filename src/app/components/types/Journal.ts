@@ -12,5 +12,6 @@ export interface Journal extends BaseJournal {
     htmlContent: string,
     lastEdit: number,
     saved?: boolean,
-    versions: BaseJournal[]
+    versions: BaseJournal[],
+    storedInDb?: boolean
 }

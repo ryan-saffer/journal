@@ -1,6 +1,7 @@
 <div *ngFor="let journal of journals">
   <journal-list-item
     [journal]="journal"
+    [selectedJournal]="selectedJournal"
     (onJournalClicked)="handleJournalClicked($event)"
     (onDeleteClicked)="handleDeleteClicked($event)">
   </journal-list-item>

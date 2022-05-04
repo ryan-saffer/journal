@@ -9,6 +9,7 @@ import { Journal } from '../../types/Journal';
 export class JournalListComponent implements OnInit {
 
   @Input() journals: Journal[]
+  @Input() selectedJournal: Journal
   @Output() onJournalClick = new EventEmitter<Journal>()
   @Output() onNewJournalClick = new EventEmitter()
   @Output() onDeleteJournalClick = new EventEmitter<Journal>()

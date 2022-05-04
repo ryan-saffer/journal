@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Journal } from '../components/types/Journal';
-import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,34 +10,43 @@ export class JournalService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getJournals(): Observable<DocumentChangeAction<Journal>[]> {
-    const journalsCollection = this.firestore.collection<Journal>('journals')
-    return journalsCollection.snapshotChanges()
+  getJournals(): Observable<QuerySnapshot<Journal>> {
+    return from(this.firestore.collection<Journal>('journals').ref.get())
   }
 
   addJournal(journal: Journal) {
+    // first sanitize the object of any values we don't want in the db
+    // ideally this could be done with typing, but need to find a cleaner way
+    const { id, saved, storedInDb, ...sanitizedJournal } = journal
     let journalToWrite = {
-      ...journal,
+      ...sanitizedJournal,
       versions: []
     }
-    return from(this.firestore.collection<Journal>('journals').add(journalToWrite))
+    return from(this.firestore.collection('journals').add(journalToWrite))
   }
 
   updateJournal(journal: Journal) {
-    // first add current version to history
-    this.firestore.doc<Journal>(`journals/${journal.id}`).get()
-      .subscribe(snapshot => {
-        let data = snapshot.data()
-        const { versions, ...existingJournal } = data
-        let newJournal = {
-          ...journal,
-          versions: [
-            ...versions,
-            existingJournal
-          ]
-        }
-        this.firestore.doc(`journals/${journal.id}`).update(newJournal)
-      })
+    // first sanitize the object of any values we don't want in the db
+    // ideally this could be done with typing, but need to find a cleaner way
+    const { id, saved, storedInDb, ...sanitizedJournal } = journal
+    // start by getting the current version in db, to store in versions
+    return new Promise(resolve => {
+      this.firestore.doc<Journal>(`journals/${id}`).get()
+        .subscribe(snapshot => {
+          let data = snapshot.data()
+          const { versions, ...existingJournal } = data
+          // then replace current version with latest, while adding in the existing one to versions
+          let newJournal: Journal = {
+            ...sanitizedJournal,
+            versions: [
+              ...versions,
+              existingJournal
+            ]
+          }
+          this.firestore.doc<Journal>(`journals/${journal.id}`).update(newJournal)
+          resolve(newJournal)
+        })
+    })
   }
 
   deleteJournal(journal: Journal) {

@@ -12,6 +12,7 @@
       <ion-col size="4">
         <journal-list
           [journals]="journals ?? []"
+          [selectedJournal]="selectedJournal"
           (onJournalClick)="handleJournalClick($event)"
           (onNewJournalClick)="handleNewJournalClick()"
           (onDeleteJournalClick)="handleDeleteJournalClick($event)"
