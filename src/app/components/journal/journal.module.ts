@@ -16,13 +16,7 @@ import { JournalListItemComponent } from './journal-list-item/journal-list-item.
     CommonModule,
     FormsModule,
     IonicModule,
-    QuillModule.forRoot(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: JournalRootComponent
-      }
-    ])
+    QuillModule.forRoot()
   ],
   declarations: [
     JournalRootComponent,

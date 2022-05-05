@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Journal } from '../components/types/Journal';
+import { Journal } from '../types/Journal';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
 
 @Injectable({

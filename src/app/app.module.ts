@@ -1,6 +1,7 @@
+import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -13,7 +14,7 @@ import { JournalModule } from './components/journal/journal.module';
 import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SignInComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

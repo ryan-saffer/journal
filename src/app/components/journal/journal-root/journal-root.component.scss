@@ -13,3 +13,12 @@ ion-col {
 .empty {
     text-align: center;
 }
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signOutBtn {
+    margin-right: 20px;
+}

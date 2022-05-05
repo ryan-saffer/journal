@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Journal } from '../../types/Journal';
+import { Journal } from '../../../types/Journal';
 
 @Component({
   selector: 'journal-list',

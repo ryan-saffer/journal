@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { unixToString } from 'src/app/utilities';
-import { BaseJournal } from '../../types/Journal';
+import { BaseJournal } from '../../../types/Journal';
 
 @Component({
   selector: 'edits-history-list',

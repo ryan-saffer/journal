@@ -1,7 +1,8 @@
-import { replaceQuillContent, unixToString } from 'src/app/utilities';
+import { AuthService } from './../../../services/auth.service';
+import { replaceQuillContent } from 'src/app/utilities';
 import { JournalService } from './../../../services/journal.service';
 import { Component, OnInit } from '@angular/core';
-import { Journal } from '../../types/Journal';
+import { Journal } from '../../../types/Journal';
 
 var id = 0;
 
@@ -15,7 +16,10 @@ export class JournalRootComponent implements OnInit {
   journals: Journal[] = []
   selectedJournal: Journal
 
-  constructor(private journalService: JournalService) { }
+  constructor(
+    private journalService: JournalService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.journalService.getJournals()
@@ -91,5 +95,9 @@ export class JournalRootComponent implements OnInit {
   handleDeleteJournalClick(journal: Journal) {
     this.journalService.deleteJournal(journal)
       .subscribe(() => this.journals = this.journals.filter(it => it.id !== journal.id))
+  }
+
+  signOut() {
+    this.authService.SignOut()
   }
 }

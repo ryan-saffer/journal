@@ -1,4 +1,4 @@
-import { Journal } from '../../types/Journal';
+import { Journal } from '../../../types/Journal';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { unixToString } from 'src/app/utilities';
 

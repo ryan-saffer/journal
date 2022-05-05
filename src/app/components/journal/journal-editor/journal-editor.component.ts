@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
 import { replaceQuillContent } from 'src/app/utilities';
-import { Journal } from '../../types/Journal';
+import { Journal } from '../../../types/Journal';
 
 @Component({
   selector: 'journal-editor',
