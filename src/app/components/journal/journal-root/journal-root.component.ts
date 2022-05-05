@@ -15,6 +15,7 @@ export class JournalRootComponent implements OnInit {
 
   journals: Journal[] = []
   selectedJournal: Journal
+  isLoading = true
 
   constructor(
     private journalService: JournalService,
@@ -32,6 +33,7 @@ export class JournalRootComponent implements OnInit {
         ))
         this.journals.sort((first, second) => second.lastEdit - first.lastEdit)
         this.selectedJournal = this.journals[0]
+        this.isLoading = false
       })
   }
 

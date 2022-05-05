@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col size="4">
         <journal-list
